@@ -1,7 +1,29 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 exports.__esModule = true;
 var message = "Hello world";
 console.log(message);
+//JS
+function addme(num1, num2) {
+    return num1 + num2;
+}
+addme("2", "3"); //logical runtime error
+//This can be checked with typescript at compile time
+function addme2(num1, num2) {
+    return num1 + num2;
+}
 /////////// 2- VARIABLE DECLARATION & VARIABLE TYPES
 /*
     - In JS it does not throw an error for variable redeclarations
@@ -130,3 +152,36 @@ var p2 = {
 fullNameWithInterface(p2);
 //@@@@@@@@@@@@5-Classes and Access Modifiers
 //In JS there was no classes and there was prototypal inheritence
+var Employee = /** @class */ (function () {
+    function Employee(name) {
+        this.employeeName = name;
+        this.employeeCode = "123456";
+    }
+    Employee.prototype.greet = function () {
+        console.log("Good Morning", name);
+    };
+    return Employee;
+}());
+var emp1 = new Employee("Usman");
+emp1.greet();
+emp1.employeeCode; //error
+//inheritace now possible with TS
+var Manager = /** @class */ (function (_super) {
+    __extends(Manager, _super);
+    function Manager(managerName) {
+        return _super.call(this, managerName) || this;
+    }
+    Manager.prototype.delegateWork = function () {
+        console.log("Manager delegating tasks...");
+    };
+    return Manager;
+}(Employee));
+var m1 = new Manager("Bain");
+console.log(m1.employeeName);
+m1.greet();
+m1.delegateWork();
+// Access Modifiers: Private/public/protected
+// By default all class properties are public
+// private: only accessible inside base class
+// public: accessible inside and outside class
+// protected: accessible inside base and derived class but not outside the class
